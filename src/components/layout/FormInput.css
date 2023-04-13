@@ -1,0 +1,15 @@
+.error-msg {
+    display: none;
+}
+
+input:invalid~.error-msg {
+    display: block;
+    color: red;
+    font-size: 15px;
+}
+
+.inputs {
+    margin: 4% 0 4% 0 !important;
+    height: 15%;
+    padding: 4% !important;
+}

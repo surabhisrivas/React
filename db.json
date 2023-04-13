@@ -1,0 +1,40 @@
+{
+  "employee": [
+    {
+      "name": "Jane",
+      "email": "jane@hotmail.com",
+      "phone": "9999988888",
+      "id": 4
+    },
+    {
+      "name": "Ryan",
+      "email": "ryan@hotmail.com",
+      "phone": "9999988888",
+      "id": 5
+    },
+    {
+      "name": "Joe",
+      "email": "joe@hotmail.com",
+      "phone": "9999988888",
+      "id": 6
+    },
+    {
+      "name": "Rhea",
+      "email": "rhea@hotmail.com",
+      "phone": "9999988888",
+      "id": 6
+    },
+    {
+      "name": "Billy",
+      "email": "billy@gmail.com",
+      "phone": "2345223452",
+      "id": 7
+    },
+    {
+      "name": "James",
+      "email": "james@yahoo.com",
+      "phone": "2222233333",
+      "id": 8
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+.bgimage {
+    background-image: url('../../assets/images/bg.jpg');
+}
+
+.form-container {
+    padding: 8%;
+}
+
+.submit-btn {
+    padding: 4% !important;
+    width: 100%;
+    margin-bottom: 4%;
+}

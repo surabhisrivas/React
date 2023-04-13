@@ -1,0 +1,9 @@
+.form-buttons{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.add-btn{
+    float: left;
+    margin-bottom: 1%;
+}
