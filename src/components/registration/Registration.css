@@ -1,13 +1,20 @@
 .bgimage {
     background-image: url('../../assets/images/bg.jpg');
+    margin-top: 4%;
+    background-repeat: round;
+    box-shadow: 6px 10px 20px black;
+    border-radius: 8px;
 }
 
 .form-container {
-    padding: 8%;
+    padding: 5%;
 }
 
 .submit-btn {
     padding: 4% !important;
     width: 100%;
     margin-bottom: 4%;
+    border: none;
+    color: white !important;
+    background: #4b4bb9 !important;
 }

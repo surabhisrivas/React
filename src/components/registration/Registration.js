@@ -65,7 +65,7 @@ function Registration() {
                                 {inputs && inputs.map((input) => (
                                     <FormInput key={input.id} {...input} values={values[input.name]} onChange={onChange}></FormInput>
                                 ))}
-                                <button className="btn btn-info submit-btn" type="submit">Sign Up</button>
+                                <button className="btn submit-btn" type="submit">Sign Up</button>
                             </form>
                         </div>
                     </div>
