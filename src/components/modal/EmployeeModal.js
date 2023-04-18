@@ -17,12 +17,19 @@ const EmployeeModal = (props) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const createData = (id) => {
         let imageUrl = window.URL || window.webkitURL;
         let fileObject = document.getElementById('avatar').files[0];
+        if (id) {
+            return { id: values.id, username: values.name, email: values.email, phone: values.phone, avatar: imageUrl.createObjectURL(fileObject) };
+        }
+        return { username: values.name, email: values.email, phone: values.phone, avatar: values.avatar, avatar: imageUrl.createObjectURL(fileObject) };
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
         if (props.userData) {
-            let empData = { id: values.id, username: values.name, email: values.email, phone: values.phone, avatar: imageUrl.createObjectURL(fileObject) };
+            let empData = createData(values.id);
             Object.keys(empData).forEach((element) => {
                 if (!empData[element]) {
                     empData[element] = props.userData[element];
@@ -42,7 +49,7 @@ const EmployeeModal = (props) => {
         }
         else {
             console.log(values.avatar, document.getElementById('avatar').files[0]);
-            let empData = { username: values.name, email: values.email, phone: values.phone, avatar: values.avatar, avatar: imageUrl.createObjectURL(fileObject) };
+            let empData = createData();
             fetch('http://localhost:3030/employee', {
                 method: "POST",
                 headers: { "content-type": "application/json" },

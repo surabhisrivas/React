@@ -41,6 +41,13 @@
       "phone": "9112334563",
       "avatar": "blob:http://localhost:3000/df39672c-3d98-4fb7-a9b1-911535946a72",
       "id": 7
+    },
+    {
+      "username": "Jennifer A",
+      "email": "billy@jj.com",
+      "phone": "7676454589",
+      "avatar": "blob:http://localhost:3000/bd8fae3d-eed8-48d2-8f58-1db138cf50d7",
+      "id": 8
     }
   ]
 }
