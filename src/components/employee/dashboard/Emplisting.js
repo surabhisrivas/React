@@ -1,45 +1,47 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import './EmpListing.css';
 import EmployeeModal from "../../modal/EmployeeModal";
 import ConfirmModal from "../../modal/ConfirmationModal";
+import { FaTrash, FaPen } from "react-icons/fa";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Emplisting = () => {
-    const [empData, empdatachange] = useState(null);
-    const [show, setShow] = useState(false);
-    const [showRemove, setShowRemove] = useState({ id: 0, show: false });
-    const [confirmRemove, setConfirmRemove] = useState(false);
+
+    const [empData, empDataChange] = useState(null);
+    const [showDialog, setShowDialog] = useState(false);
     const [editData, setEditData] = useState(null);
-    let removeId = 0;
+
     useEffect(() => {
         fetch('http://localhost:3030/employee').then((data) => {
             return data.json();
-        }).then((resp) => {
-            empdatachange(resp);
+        }).then((users) => {
+            empDataChange(users);
         }).catch((error) => {
             console.log("e", error);
         })
     });
+
     const removeUser = (id) => {
         fetch("http://localhost:3030/employee/" + id, {
             method: "DELETE"
-        }).then((res) => {
-            window.location.reload();
+        }).then(() => {
+            toast.warn('Removed Successfully');
         }).catch((err) => {
-            console.log(err.message)
+            console.log(err.message);
         })
     }
 
-    const confirmRemoveUser = (remove) => {
-        setShowRemove({ id: showRemove.id, show: false });
-        if (remove) {
-            removeUser(showRemove.id);
-        }
-    }
-
+    // setting the value of user to be edited
     const editUser = (user) => {
         setEditData(user);
-        setShow(true);
+        setShowDialog(true);
+    }
+
+    // setting the value of user to be edited to null
+    const closeDialog = () => {
+        setEditData(null);
+        setShowDialog(false);
     }
 
     return <div className="container emp-list-container">
@@ -49,10 +51,8 @@ const Emplisting = () => {
             </div>
             <div className="card-body">
                 <div className="button-actions">
-                    <button className="btn btn-success add-btn" onClick={() => setShow(true)}>Add +</button>
-                    <EmployeeModal onCreateClose={() => setShow(false)} show={show} userData={editData}></EmployeeModal>
-                    <ConfirmModal onConfirmClose={(remove) => confirmRemoveUser(remove)} show={showRemove.show} title={'Delete User'}
-                        message={'Are you sure you want to remove?'} ></ConfirmModal>
+                    <button className="btn btn-success add-btn" onClick={() => setShowDialog(true)}>Add +</button>
+                    <EmployeeModal onCreateClose={() => closeDialog()} show={showDialog} userData={editData}></EmployeeModal>
                 </div>
                 <table className="table table-bordered">
                     <thead className="bg-dark text-white">
@@ -69,13 +69,12 @@ const Emplisting = () => {
                             empData.map(item => (
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
-                                    <td>{item.name}</td>
+                                    <td>{item.username}</td>
                                     <td>{item.email}</td>
                                     <td>{item.phone}</td>
                                     <td className="form-buttons">
-                                        <button className="btn btn-danger" onClick={() => setShowRemove({ id: item.id, show: true })}>Remove</button>
-                                        <Link className="btn btn-success" onClick={() => editUser(item)}>Edit</Link>
-                                        <Link className="btn btn-info" to='/'>Details</Link>
+                                        <FaPen onClick={() => editUser(item)} className="icons edit-icon"></FaPen>
+                                        <FaTrash onClick={() => removeUser(item.id)} className="icons delete-icon"></FaTrash>
                                     </td>
                                 </tr>
                             ))
@@ -84,6 +83,16 @@ const Emplisting = () => {
                 </table>
             </div>
         </div>
+        <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover />
     </div >
 }
 

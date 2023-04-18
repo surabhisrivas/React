@@ -12,3 +12,15 @@
 .emp-list-container {
     margin-top: 5%;
 }
+
+.icons {
+    cursor: pointer;
+}
+
+.delete-icon {
+    color: #f32f2f;
+}
+
+.edit-icon {
+    color: #4242c2;
+}

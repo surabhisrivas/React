@@ -21,3 +21,13 @@
 .input-field {
     padding: 1% !important;
 }
+
+.error-msg {
+    display: none;
+}
+
+input:invalid~.error-msg {
+    display: block;
+    color: red;
+    font-size: 15px;
+}

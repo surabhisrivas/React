@@ -1,40 +1,52 @@
 {
   "employee": [
     {
-      "name": "surabhi",
-      "email": "sura@gmail.com",
-      "phone": "1234554321",
-      "id": 1
+      "id": 6,
+      "username": "James Franco",
+      "email": "james@yahooo.com",
+      "phone": "9919229113"
     },
     {
-      "name": "James",
-      "email": "james@yahoo.com",
-      "phone": "2345554322",
-      "id": 2
+      "id": 7,
+      "username": "Melinda Gates",
+      "email": "melina@google.com",
+      "phone": "7676454589"
     },
     {
-      "name": "billy",
-      "email": "billy@google.com",
-      "phone": "1111122222",
-      "id": 3
+      "id": 8,
+      "username": "Richie Rich",
+      "email": "rsaint@gmail.com",
+      "phone": "8723873457"
     },
     {
-      "name": "Millie",
-      "email": "millie@gmail.com",
-      "phone": "3455433456",
-      "id": 4
+      "id": 9,
+      "username": "Willy Wonka",
+      "email": "willy@google.comm",
+      "phone": "3334442225"
     },
     {
-      "name": "Beauty",
-      "email": "bjames@gmail.com",
-      "phone": "3455433456",
-      "id": 5
+      "id": 11,
+      "username": "Jimmy Knight",
+      "email": "jimy@abc.com",
+      "phone": "2221113456"
     },
     {
-      "name": "s",
-      "email": "s",
-      "phone": "s",
-      "id": 6
+      "id": 12,
+      "username": "Walters Pearson",
+      "email": "walters@yahoo.com",
+      "phone": "2344325578"
+    },
+    {
+      "username": "Ray James",
+      "email": "ray123@rayban.com",
+      "phone": "1231231233",
+      "id": 13
+    },
+    {
+      "username": "Billy Walters",
+      "email": "billy@jj.com",
+      "phone": "9889886789",
+      "id": 14
     }
   ]
 }

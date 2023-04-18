@@ -1,29 +1,57 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from 'react';
 import './EmployeeModal.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EmployeeModal = (props) => {
-    const [id, idchange] = useState('');
-    const [name, namechange] = useState('');
-    const [email, emailchange] = useState('');
-    const [phone, phonechange] = useState('');
-    const [disabled, setDisabled] = useState(true);
-    const [validation, valChange] = useState(false);
+    const [values, setValues] = useState({
+        id: null,
+        username: '',
+        email: '',
+        phone: null,
+    });
+
+    const onChange = (e) => {
+        setValues({ ...values, [e.target.name]: e.target.value });
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const empData = { name, email, phone };
-        fetch('http://localhost:3030/employee', {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify(empData)
-        }).then((data) => {
-            alert("Saved Successfully :)");
-            props.onCreateClose();
-            return data.json();
-        }).catch((error) => {
-            console.log("e", error);
-        })
+        if (props.userData) {
+            let empData = { id: values.id, username: values.name, email: values.email, phone: values.phone };
+            Object.keys(empData).forEach((element) => {
+                if (!empData[element]) {
+                    empData[element] = props.userData[element];
+                }
+            })
+            fetch('http://localhost:3030/employee/' + props.userData.id, {
+                method: "PUT",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify(empData)
+            }).then((data) => {
+                toast.success('Updated Successfully!');
+                props.onCreateClose();
+                return data.json();
+            }).catch((error) => {
+                console.log("e", error);
+            })
+        }
+        else {
+            let empData = { username: values.name, email: values.email, phone: values.phone };
+            fetch('http://localhost:3030/employee', {
+                method: "POST",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify(empData)
+            }).then((data) => {
+                toast.success('Added Successfully!');
+                props.onCreateClose();
+                return data.json();
+            }).catch((error) => {
+                console.log("e", error);
+            });
+        }
+        setValues({});
     }
 
     if (!props.show) {
@@ -41,29 +69,31 @@ const EmployeeModal = (props) => {
                             <div className="col-lg-12">
                                 <div className="form-group">
                                     <label>ID</label>
-                                    <input className="form-control input-field" value={id} disabled={!(props.userData?.id) ? true : false}></input>
+                                    <input className="form-control input-field" defaultValue={props.userData?.id}
+                                        disabled={true}>
+                                    </input>
                                 </div>
                             </div>
                             <div className="col-lg-12">
                                 <div className="form-group">
                                     <label>Name</label>
-                                    <input className="form-control input-field" value={name} onChange={e => namechange(e.target.value)}
-                                        onMouseUp={e => valChange(true)}>
+                                    <input className="form-control input-field" name="name" defaultValue={props.userData?.username}
+                                        onChange={onChange} pattern="[A-Za-z0-9 ]{3,20}" required>
                                     </input>
                                 </div>
                             </div>
                             <div className="col-lg-12">
                                 <div className="form-group">
                                     <label>Phone</label>
-                                    <input className="form-control input-field" value={phone}
-                                        onChange={e => phonechange(e.target.value)}></input>
+                                    <input className="form-control input-field" name="phone" defaultValue={props.userData?.phone}
+                                        onChange={onChange} pattern="[0-9]{10}" required></input>
                                 </div>
                             </div>
                             <div className="col-lg-12">
                                 <div className="form-group">
                                     <label>Email</label>
-                                    <input className="form-control input-field" value={email}
-                                        onChange={e => emailchange(e.target.value)}></input>
+                                    <input className="form-control input-field" name="email" defaultValue={props.userData?.email}
+                                        onChange={onChange} type="email" required></input>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +104,7 @@ const EmployeeModal = (props) => {
                     </div>
                 </form>
             </div >
-        </div>
+        </div >
     )
 }
 
