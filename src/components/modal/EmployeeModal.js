@@ -17,20 +17,6 @@ const EmployeeModal = (props) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
 
-    const createData = (id) => {
-        let imageUrl = window.URL || window.webkitURL;
-        let fileObject = document.getElementById('avatar').files[0];
-        let avatarImage = props.userData?.avatar;
-        if (fileObject) {
-            avatarImage = imageUrl.createObjectURL(fileObject)
-        }
-        if (id) {
-            return { id: values.id, username: values.name, email: values.email, phone: values.phone, avatar: avatarImage };
-        } else {
-            return { username: values.name, email: values.email, phone: values.phone, avatar: values.avatar, avatar: avatarImage };
-        }
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (props.userData) {
@@ -69,6 +55,20 @@ const EmployeeModal = (props) => {
         setValues({});
     }
 
+    const createData = (id) => {
+        let imageUrl = window.URL || window.webkitURL;
+        let fileObject = document.getElementById('avatar').files[0];
+        let avatarImage = props.userData?.avatar;
+        if (fileObject) {
+            avatarImage = imageUrl.createObjectURL(fileObject)
+        }
+        if (id) {
+            return { id: values.id, username: values.name, email: values.email, phone: values.phone, avatar: avatarImage };
+        } else {
+            return { username: values.name, email: values.email, phone: values.phone, avatar: values.avatar, avatar: avatarImage };
+        }
+    }
+
     if (!props.show) {
         return null;
     }
@@ -82,7 +82,7 @@ const EmployeeModal = (props) => {
                     <div className="card-body create-card">
                         <div className="row">
                             <div className="col-lg-12">
-                                <div className="form-group">
+                                <div className="form-group label-container">
                                     <label>ID</label>
                                     <input className="form-control input-field" defaultValue={props.userData?.id}
                                         disabled={true}>
@@ -90,7 +90,7 @@ const EmployeeModal = (props) => {
                                 </div>
                             </div>
                             <div className="col-lg-12">
-                                <div className="form-group">
+                                <div className="form-group label-container">
                                     <label>Name</label>
                                     <input className="form-control input-field" name="name" defaultValue={props.userData?.username}
                                         onChange={onChange} pattern="[A-Za-z0-9 ]{3,20}" required>
@@ -98,21 +98,21 @@ const EmployeeModal = (props) => {
                                 </div>
                             </div>
                             <div className="col-lg-12">
-                                <div className="form-group">
+                                <div className="form-group label-container">
                                     <label>Phone</label>
                                     <input className="form-control input-field" name="phone" defaultValue={props.userData?.phone}
                                         onChange={onChange} pattern="[0-9]{10}" required></input>
                                 </div>
                             </div>
                             <div className="col-lg-12">
-                                <div className="form-group">
+                                <div className="form-group label-container">
                                     <label>Email</label>
                                     <input className="form-control input-field" name="email" defaultValue={props.userData?.email}
                                         onChange={onChange} type="email" required></input>
                                 </div>
                             </div>
                             <div className="col-lg-12">
-                                <div className="form-group">
+                                <div className="form-group label-container">
                                     <label>Avatar</label>
                                     <div className="avatar-container">
                                         <input className="form-control input-field" name="avatar"
