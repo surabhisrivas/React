@@ -46,18 +46,18 @@ const Emplisting = () => {
 
     return <div className="container emp-list-container">
         <div className="card">
-            <div className="card-title">
+            <div className="card-title-area">
                 <h2>Employees Directory</h2>
-            </div>
-            <div className="card-body">
                 <div className="button-actions">
                     <button className="btn btn-success add-btn" onClick={() => setShowDialog(true)}>Add +</button>
                     <EmployeeModal onCreateClose={() => closeDialog()} show={showDialog} userData={editData}></EmployeeModal>
                 </div>
+            </div>
+            <div className="card-body">
                 <table className="table table-bordered">
                     <thead className="bg-dark text-white">
                         <tr>
-                            <td>ID</td>
+                            <td>Avatar</td>
                             <td>Name</td>
                             <td>Email</td>
                             <td>Phone</td>
@@ -68,7 +68,7 @@ const Emplisting = () => {
                         {empData &&
                             empData.map(item => (
                                 <tr key={item.id}>
-                                    <td>{item.id}</td>
+                                    <td><img src={item.avatar} className="image"></img></td>
                                     <td>{item.username}</td>
                                     <td>{item.email}</td>
                                     <td>{item.phone}</td>

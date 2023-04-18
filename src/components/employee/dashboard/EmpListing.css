@@ -4,13 +4,17 @@
 }
 
 .add-btn {
-    float: right;
-    margin-bottom: 1%;
-    margin-right: 1%;
+    width: 100%;
+    margin: 13% 1% 0 0;
+}
+
+h2 {
+    margin: 1% 0 0 1%;
 }
 
 .emp-list-container {
     margin-top: 5%;
+    font-size: medium;
 }
 
 .icons {
@@ -23,4 +27,16 @@
 
 .edit-icon {
     color: #4242c2;
+}
+
+.card-title-area {
+    display: flex;
+}
+
+.button-actions {
+    margin-left: 69%;
+}
+
+.image{
+    height: 45px;
 }

@@ -10,6 +10,7 @@ const EmployeeModal = (props) => {
         username: '',
         email: '',
         phone: null,
+        avatar: null
     });
 
     const onChange = (e) => {
@@ -18,8 +19,10 @@ const EmployeeModal = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        let imageUrl = window.URL || window.webkitURL;
+        let fileObject = document.getElementById('avatar').files[0];
         if (props.userData) {
-            let empData = { id: values.id, username: values.name, email: values.email, phone: values.phone };
+            let empData = { id: values.id, username: values.name, email: values.email, phone: values.phone, avatar: imageUrl.createObjectURL(fileObject) };
             Object.keys(empData).forEach((element) => {
                 if (!empData[element]) {
                     empData[element] = props.userData[element];
@@ -38,7 +41,8 @@ const EmployeeModal = (props) => {
             })
         }
         else {
-            let empData = { username: values.name, email: values.email, phone: values.phone };
+            console.log(values.avatar, document.getElementById('avatar').files[0]);
+            let empData = { username: values.name, email: values.email, phone: values.phone, avatar: values.avatar, avatar: imageUrl.createObjectURL(fileObject) };
             fetch('http://localhost:3030/employee', {
                 method: "POST",
                 headers: { "content-type": "application/json" },
@@ -94,6 +98,16 @@ const EmployeeModal = (props) => {
                                     <label>Email</label>
                                     <input className="form-control input-field" name="email" defaultValue={props.userData?.email}
                                         onChange={onChange} type="email" required></input>
+                                </div>
+                            </div>
+                            <div className="col-lg-12">
+                                <div className="form-group">
+                                    <label>Avatar</label>
+                                    <div className="avatar-container">
+                                        <input className="form-control input-field" name="avatar"
+                                            onChange={onChange} type="file" required id="avatar"></input>
+                                        <img src={props.userData?.avatar}></img>
+                                    </div>
                                 </div>
                             </div>
                         </div>

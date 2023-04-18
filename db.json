@@ -1,52 +1,46 @@
 {
   "employee": [
     {
-      "id": 6,
+      "id": 1,
       "username": "James Franco",
-      "email": "james@yahooo.com",
-      "phone": "9919229113"
+      "email": "james@yahoo.com",
+      "phone": "1111111111",
+      "avatar": "blob:http://localhost:3000/6e097971-104b-4f8b-9da0-c3a2dd6b939a"
     },
     {
-      "id": 7,
-      "username": "Melinda Gates",
-      "email": "melina@google.com",
-      "phone": "7676454589"
-    },
-    {
-      "id": 8,
-      "username": "Richie Rich",
-      "email": "rsaint@gmail.com",
-      "phone": "8723873457"
-    },
-    {
-      "id": 9,
-      "username": "Willy Wonka",
-      "email": "willy@google.comm",
-      "phone": "3334442225"
-    },
-    {
-      "id": 11,
-      "username": "Jimmy Knight",
-      "email": "jimy@abc.com",
-      "phone": "2221113456"
-    },
-    {
-      "id": 12,
-      "username": "Walters Pearson",
-      "email": "walters@yahoo.com",
-      "phone": "2344325578"
-    },
-    {
-      "username": "Ray James",
-      "email": "ray123@rayban.com",
-      "phone": "1231231233",
-      "id": 13
-    },
-    {
-      "username": "Billy Walters",
+      "id": 2,
+      "username": "Billy Bain",
       "email": "billy@jj.com",
-      "phone": "9889886789",
-      "id": 14
+      "phone": "1111111111",
+      "avatar": "blob:http://localhost:3000/f1cfa267-bebd-4cd1-ad38-e30137572ee4"
+    },
+    {
+      "username": "Melinda",
+      "email": "melina@google.com",
+      "phone": "9112334563",
+      "avatar": "blob:http://localhost:3000/8557a3c1-c76d-49d5-b719-b5c3fe996f6b",
+      "id": 4
+    },
+    {
+      "username": "Sam Andrson",
+      "email": "sam@gmail.com",
+      "phone": "7676454589",
+      "avatar": "blob:http://localhost:3000/af402ee5-12b1-46d5-b6a3-108d2cfb6f3e",
+      "id": 5
+    },
+    {
+      "username": "Gina Terry",
+      "email": "ginaT@abc.com",
+      "phone": "5674745674",
+      "avatar": "blob:http://localhost:3000/9db164fe-64a0-45db-a2b5-00e893322b24",
+      "id": 6
+    },
+    {
+      "username": "James Franco",
+      "email": "james@yahoo.com",
+      "phone": "9112334563",
+      "avatar": "blob:http://localhost:3000/df39672c-3d98-4fb7-a9b1-911535946a72",
+      "id": 7
     }
   ]
 }
