@@ -20,16 +20,21 @@ const EmployeeModal = (props) => {
     const createData = (id) => {
         let imageUrl = window.URL || window.webkitURL;
         let fileObject = document.getElementById('avatar').files[0];
-        if (id) {
-            return { id: values.id, username: values.name, email: values.email, phone: values.phone, avatar: imageUrl.createObjectURL(fileObject) };
+        let avatarImage = props.userData?.avatar;
+        if (fileObject) {
+            avatarImage = imageUrl.createObjectURL(fileObject)
         }
-        return { username: values.name, email: values.email, phone: values.phone, avatar: values.avatar, avatar: imageUrl.createObjectURL(fileObject) };
+        if (id) {
+            return { id: values.id, username: values.name, email: values.email, phone: values.phone, avatar: avatarImage };
+        } else {
+            return { username: values.name, email: values.email, phone: values.phone, avatar: values.avatar, avatar: avatarImage };
+        }
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (props.userData) {
-            let empData = createData(values.id);
+            let empData = createData(props.userData.id);
             Object.keys(empData).forEach((element) => {
                 if (!empData[element]) {
                     empData[element] = props.userData[element];
@@ -48,7 +53,6 @@ const EmployeeModal = (props) => {
             })
         }
         else {
-            console.log(values.avatar, document.getElementById('avatar').files[0]);
             let empData = createData();
             fetch('http://localhost:3030/employee', {
                 method: "POST",
@@ -112,7 +116,7 @@ const EmployeeModal = (props) => {
                                     <label>Avatar</label>
                                     <div className="avatar-container">
                                         <input className="form-control input-field" name="avatar"
-                                            onChange={onChange} type="file" required id="avatar"></input>
+                                            onChange={onChange} type="file" id="avatar"></input>
                                         <img src={props.userData?.avatar}></img>
                                     </div>
                                 </div>
