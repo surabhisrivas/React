@@ -1,7 +1,7 @@
 import './App.css';
 import Emplisting from '../employee/dashboard/Emplisting';
 import Registration from '../registration/Registration';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NavBar from '../layout/NavBar';
 import Contact from '../contact/ContactUs';
 

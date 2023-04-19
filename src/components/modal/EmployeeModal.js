@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from 'react';
 import './EmployeeModal.css';
 import { toast } from 'react-toastify';
@@ -13,6 +13,7 @@ const EmployeeModal = (props) => {
         avatar: null
     });
 
+    const [file, setFile] = useState(props.userData?.avatar);
     const onChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
@@ -21,22 +22,24 @@ const EmployeeModal = (props) => {
         e.preventDefault();
         if (props.userData) {
             let empData = createData(props.userData.id);
-            Object.keys(empData).forEach((element) => {
-                if (!empData[element]) {
-                    empData[element] = props.userData[element];
-                }
-            })
-            fetch('http://localhost:3030/employee/' + props.userData.id, {
-                method: "PUT",
-                headers: { "content-type": "application/json" },
-                body: JSON.stringify(empData)
-            }).then((data) => {
-                toast.success('Updated Successfully!');
-                props.onCreateClose();
-                return data.json();
-            }).catch((error) => {
-                console.log("e", error);
-            })
+            if (empData) {
+                Object.keys(empData).forEach((element) => {
+                    if (!empData[element]) {
+                        empData[element] = props.userData[element];
+                    }
+                })
+                fetch('http://localhost:3030/employee/' + props.userData.id, {
+                    method: "PUT",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify(empData)
+                }).then((data) => {
+                    toast.success('Updated Successfully!');
+                    props.onCreateClose();
+                    return data.json();
+                }).catch((error) => {
+                    console.log("e", error);
+                })
+            }
         }
         else {
             let empData = createData();
@@ -55,17 +58,26 @@ const EmployeeModal = (props) => {
         setValues({});
     }
 
-    const createData = (id) => {
-        let imageUrl = window.URL || window.webkitURL;
-        let fileObject = document.getElementById('avatar').files[0];
-        let avatarImage = props.userData?.avatar;
-        if (fileObject) {
-            avatarImage = imageUrl.createObjectURL(fileObject)
+    const onFileChange = () => {
+        const selectedfile = document.getElementById('avatar').files;
+        if (selectedfile.length > 0) {
+            const [imageFile] = selectedfile;
+            const fileReader = new FileReader();
+            fileReader.onload = () => {
+                const srcData = fileReader.result;
+                setFile(srcData);
+            };
+            fileReader.readAsDataURL(imageFile);
         }
+    }
+
+    const createData = (id) => {
         if (id) {
-            return { id: values.id, username: values.name, email: values.email, phone: values.phone, avatar: avatarImage };
+            console.log({ id: values.id, username: values.name, email: values.email, phone: values.phone, avatar: file });
+            return { id: values.id, username: values.name, email: values.email, phone: values.phone, avatar: file };
         } else {
-            return { username: values.name, email: values.email, phone: values.phone, avatar: values.avatar, avatar: avatarImage };
+            console.log({ username: values.name, email: values.email, phone: values.phone, avatar: file });
+            return { username: values.name, email: values.email, phone: values.phone, avatar: file };
         }
     }
 
@@ -116,7 +128,7 @@ const EmployeeModal = (props) => {
                                     <label>Avatar</label>
                                     <div className="avatar-container">
                                         <input className="form-control input-field" name="avatar"
-                                            onChange={onChange} type="file" id="avatar"></input>
+                                            onChange={onFileChange} type="file" id="avatar"></input>
                                         <img src={props.userData?.avatar}></img>
                                     </div>
                                 </div>

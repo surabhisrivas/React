@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import './EmpListing.css';
 import EmployeeModal from "../../modal/EmployeeModal";
-import ConfirmModal from "../../modal/ConfirmationModal";
 import { FaTrash, FaPen } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
